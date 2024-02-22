@@ -1,5 +1,6 @@
 //복스패로우 둥지(서버)
 #include <vector>
+#include <string>
 #include <process.h>
 
 #include "serverbase.h"
@@ -97,8 +98,12 @@ unsigned WINAPI processClient(void* arg)
     //우선 선택된 채팅방 코드 들고 오기
     memset(buf,0,BUF_SIZE);
     recv(clntSock,buf,3,0); //채팅방 코드 받기
-    std::cout<<buf;
+    std::cout<<buf<<std::endl;
+    int portNum=91016+std::stoi(buf);
+    std::cout<<portNum<<std::endl;
+    char* portNumString;
+    itoa(portNum,portNumString,10);
+    std::cout<<portNumString<<std::endl;
 
-
-    ChatServer serv;
+    ChatServer serv(portNumString);
 }

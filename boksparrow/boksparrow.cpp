@@ -10,7 +10,7 @@ std::vector<std::string> chatroomList;
 
 int main()
 {
-    ClientBase clnt("10.10.20.98","91016");
+    ClientBase clnt("127.0.0.1","91016");
     //연결되면 닉네임 입력 받기
     std::cout<<"닉네임을 입력하세요: (20자 이하)";
     std::string nick;
@@ -41,9 +41,9 @@ int main()
     std::cout<<"채팅방을 선택하세요 >";
     char input;
     std::cin>>input;
-    std::cout<<(int)input;
+    // std::cout<<(int)input; //1=49
 
-    // send(clnt.sock,chatroomList[input])
+    send(clnt.sock,chatroomList[(int)input-49].c_str(),3,0);
     //채팅방 코드를 서버에 보내면 
     //어떻게 할까...?
     
