@@ -18,6 +18,6 @@ public:
     ~ServerBase(); //서버 종료
     
     void ErrorHandling(std::string); //에러 메시지 출력 후 종료
-    void openServer(int); //서버 오픈(대기 큐 크기)
+    void openServer(int=SOMAXCONN); //서버 오픈(대기 큐 크기)
 };
 #endif

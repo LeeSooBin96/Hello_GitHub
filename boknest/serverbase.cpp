@@ -1,41 +1,45 @@
 #include "serverbase.h"
 
-//(ìƒì„±ì)ìœˆì† ë¼ì´ë¸ŒëŸ¬ë¦¬ ì´ˆê¸°í™” ë° ì†Œì¼“ ìƒì„± -- ì„œë²„ ì†Œì¼“ ì´ˆê¸°í™”
+//(»ı¼ºÀÚ)À©¼Ó ¶óÀÌºê·¯¸® ÃÊ±âÈ­ ¹× ¼ÒÄÏ »ı¼º -- ¼­¹ö ¼ÒÄÏ ÃÊ±âÈ­
 ServerBase::ServerBase(const char* port)
 {
     if(WSAStartup(MAKEWORD(2,2),&wsaData)!=0)
     {
-        ErrorHandling("WSAStartup() error!"); //ìœˆì† ë¼ì´ë¸ŒëŸ¬ë¦¬ êµ¬ì¡°ì²´ ì´ˆê¸°í™” ì˜¤ë¥˜
+        ErrorHandling("WSAStartup() error!"); //À©¼Ó ¶óÀÌºê·¯¸® ±¸Á¶Ã¼ ÃÊ±âÈ­ ¿À·ù
         return;
     }
-    servSock=socket(PF_INET,SOCK_STREAM,0); //TCP ì†Œì¼“ ìƒì„±
-    //ì£¼ì†Œ ì •ë³´ ì´ˆê¸°í™”
+    servSock=socket(PF_INET,SOCK_STREAM,0); //TCP ¼ÒÄÏ »ı¼º
+    //ÁÖ¼Ò Á¤º¸ ÃÊ±âÈ­
     memset(&servAdr,0,sizeof(servAdr));
     servAdr.sin_family=AF_INET; //IPv4
-    servAdr.sin_addr.s_addr=htonl(INADDR_ANY); //í˜¸ìŠ¤íŠ¸ ì£¼ì†Œ ì„¤ì • 
+    servAdr.sin_addr.s_addr=htonl(INADDR_ANY); //È£½ºÆ® ÁÖ¼Ò ¼³Á¤ 
     servAdr.sin_port=htons(atoi(port));
-    //ì£¼ì†Œ í• ë‹¹
+    //ÁÖ¼Ò ÇÒ´ç
     if(bind(servSock,(SOCKADDR*)&servAdr,sizeof(servAdr))==SOCKET_ERROR)
     {
         ErrorHandling("bind() error");
     }
 }
-//(ì†Œë©¸ì) ì„œë²„ ì¢…ë£Œ
+//(¼Ò¸êÀÚ) ¼­¹ö Á¾·á
 ServerBase::~ServerBase()
 {
-    closesocket(servSock); //ì„œë²„ ì†Œì¼“ ì¢…ë£Œ
-    WSACleanup(); //ìœˆì† ë¼ì´ë¸ŒëŸ¬ë¦¬ í•´ì œ
+    closesocket(servSock); //¼­¹ö ¼ÒÄÏ Á¾·á
+    WSACleanup(); //À©¼Ó ¶óÀÌºê·¯¸® ÇØÁ¦
 }
 
-//ì„œë²„ ì˜¤í”ˆ(ëŒ€ê¸° í í¬ê¸°)
+//¼­¹ö ¿ÀÇÂ(´ë±â Å¥ Å©±â)
 void ServerBase::openServer(int waitnum)
 {
-    if(listen(servSock,waitnum)==SOCKET_ERROR) //í´ë¼ì´ì–¸íŠ¸ ì—°ê²° ëŒ€ê¸°
+    if(listen(servSock,waitnum)==SOCKET_ERROR) //Å¬¶óÀÌ¾ğÆ® ¿¬°á ´ë±â
     {
         ErrorHandling("listen() error");
     }
+    else
+    {
+        std::cout<<"¼­¹ö ¿ÀÇÂ \n";
+    }
 }
-//ì—ëŸ¬ ë©”ì‹œì§€ ì¶œë ¥ í›„ ì¢…ë£Œ
+//¿¡·¯ ¸Ş½ÃÁö Ãâ·Â ÈÄ Á¾·á
 void ServerBase::ErrorHandling(std::string msg)
 {
     std::cerr<<msg<<std::endl;

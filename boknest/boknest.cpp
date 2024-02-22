@@ -1,9 +1,104 @@
-//ë³µìŠ¤íŒ¨ë¡œìš° ë‘¥ì§€(ì„œë²„)
-#include "handlingclient.h"
+//º¹½ºÆÐ·Î¿ì µÕÁö(¼­¹ö)
+#include <vector>
+#include <process.h>
+
+#include "serverbase.h"
+#include "chatserver.h"
+
+const unsigned int BUF_SIZE=1024;
+
+struct clntInfo //À¯Àú ¼ÒÄÏ-´Ð³×ÀÓ ¿¬°á
+{
+    std::string nick;
+    SOCKET clntSock;
+};
+struct chatroomInfo //Ã¤ÆÃ¹æ Á¤º¸
+{
+    std::string title; //Ã¤ÆÃ¹æ ÀÌ¸§
+    std::string code; //Ã¤ÆÃ¹æ ÄÚµå
+    std::vector<std::string> whiteList; //È­ÀÌÆ®¸®½ºÆ®
+    std::vector<std::string> conUser; //Á¢¼ÓÇÑ À¯Àú
+};
+
+std::vector<clntInfo> clntList; //´Ð³×ÀÓ-¼ÒÄÏ ¿¬°á ±¸Á¶Ã¼ ¹è¿­
+std::vector<chatroomInfo> cRoomList; //Ã¤ÆÃ¹æ ¸®½ºÆ®
+
+
+//Å¬¶óÀÌ¾ðÆ® ¿¬°á ¼ö¶ô½Ã ½ÇÇàµÇ´Â ÇÁ·Î¼¼½º
+unsigned WINAPI processClient(void* arg);
 
 int main()
 {
-    HandlingClient chat;
+    //±âº» Ã¤ÆÃ¹æ »ý¼º
+    cRoomList.push_back(chatroomInfo{"Ã¤ÆÃ¹æ1","123",});
+    cRoomList.push_back(chatroomInfo{"Ã¤ÆÃ¹æ2","456",});
+    cRoomList.push_back(chatroomInfo{"Ã¤ÆÃ¹æ3","789",});
 
+    ServerBase serv("91016"); //¼­¹ö ÃÊ±âÈ­
+    serv.openServer(); //¼­¹ö ¿ÀÇÂ
+    while(true) //°è¼ÓÇØ¼­ Å¬¶óÀÌ¾ðÆ® ¹ÞÀ½
+    {
+        //Å¬¶óÀÌ¾ðÆ® ¿¬°á
+        SOCKET clntSock;
+        SOCKADDR_IN clntAdr;
+        int clntAdrSz=sizeof(clntAdr);
+        clntSock=accept(serv.servSock,(SOCKADDR*)&clntAdr,&clntAdrSz);
+        std::cout<<"Á¢¼ÓÇÑ ¾ÆÀÌÇÇ: "<<inet_ntoa(clntAdr.sin_addr)<<std::endl;
+        //¿¬°á¸¸ ÇÏ°í ¸Þ½ÃÁö ¼ö½Å ÆÄÆ® ½º·¹µå·Î ³Ñ±âÀÚ--¼º°ø ÀÌÁ¦ Àú±â¼­ ¼ö½Å¹ÞÀº ¸Þ½ÃÁö ±âÁØÀ¸·Î Ã³¸®ÇÏ¸éµÊ.
+        HANDLE hthread;
+        hthread=(HANDLE)_beginthreadex(NULL,0,processClient,(void*)&clntSock,0,NULL);
+    }
+    //¾Æ¸¶ ¿©±â ¾Æ·¡´Â ½ÇÇàµÇÁö ¾ÊÀ»°Í
+    //¿¬°áµÈ ¸ðµç Å¬¶óÀÌ¾ðÆ® ¼ÒÄÏ Á¾·á
+    for(auto mem: clntList)
+    {
+        closesocket(mem.clntSock);
+    }
+    
     return 0;
+}
+//¿¬°áµÈ Å¬¶óÀÌ¾ðÆ® Ã³¸® --°¢ Å¬¶óÀÌ¾ðÆ®¸¶´Ù ½ÇÇàµÊ. 
+unsigned WINAPI processClient(void* arg)
+{
+    SOCKET clntSock=*((SOCKET*)arg); //Àü´ÞµÈ Å¬¶óÀÌ¾ðÆ® ¼ÒÄÏ ÀúÀå
+    //¿ì¼± Á¢¼ÓÇÏÀÚ¸¶ÀÚ
+    //Á¢¼ÓÇÑ Å¬¶óÀÌ¾ðÆ® ´Ð³×ÀÓ-¼ÒÄÏ ¿¬°á
+    char name[21]={0};
+    int len;
+    len=recv(clntSock,name,20,0);
+    name[len]=0;
+
+    clntInfo clnt;
+    clnt.clntSock=clntSock;
+    clnt.nick=name;
+    std::cout<<"Á¢¼ÓÇÑ À¯Àú : "<<clnt.nick<<std::endl;
+    clntList.push_back(clnt); //ÀÎµ¦½º°¡ ÇÊ¿äÇÑ°Ç ¾Æ´Ï±â ¶§¹®¿¡ ¿©±â´Â ÀÓ°è¿µ¿ª ¼³Á¤ÀÌ ÇÊ¿ä ¾øÀ½
+    //´Ð³×ÀÓÀÌ ¾È°ãÄ¡°Ô ÇÏ´Â ºÎºÐÀº ÇÊ¿äÇÒ°Í°°Àºµ¥ --³ªÁß¿¡ Ãß°¡ ¿ì¼± Ã¤ÆÃ¹æ ¸¸µé¾îº¸ÀÚ
+    //Ã¤ÆÃ¹æ °³¼ö¿Í ÄÚµå¸¦ Àü´ÞÇÒ °Í.
+    std::string chatroomInfo;
+    char buf[BUF_SIZE]={0};
+    itoa(cRoomList.size(),buf,10);
+    chatroomInfo.append(buf); //Ã¤ÆÃ¹æ °³¼ö Àü´Þ
+    for(int i=0;i<cRoomList.size();i++)
+    {
+        //Ã¤ÆÃ¹æ ÀÌ¸§, Ã¤ÆÃ¹æ ÄÚµå, Ã¤ÆÃ¹æ Á¢¼ÓÀÎ¿ø º¸³»¾ßÇÔ
+        chatroomInfo.append("@"+cRoomList[i].title+"@"+cRoomList[i].code+"@");
+        itoa(cRoomList[i].conUser.size(),buf,10);
+        chatroomInfo.append(buf);
+    }
+    send(clntSock,chatroomInfo.c_str(),chatroomInfo.size(),0);
+    //³ªÁß¿¡ ´Ù¸¥ À¯Àú Á¢¼Ó Á¤º¸µµ ÇÔ²² Àü´ÞÇÒ ¼ö ÀÖµµ·Ï ÇØ¾ßÇÔ
+    //Ã¤ÆÃ¹æ Á¤º¸¿¡ ÇÊ¿äÇÑ°Í: Ã¤ÆÃ¹æ ÀÌ¸§, ÄÚµå, Á¢¼ÓÇÑ À¯Àú, È­ÀÌÆ®¸®½ºÆ®(NULLÀº ¿ÀÇÂÃ¤ÆÃ¹æ)
+    //°¢ Ã¤ÆÃ¹æº° ½º·¹µå¸¦ µ¹¸±±î ¾Æ´Ï¸é Æ÷Æ®¸¦ ´Ù¸£°Ô ¼­¹ö¸¦ »õ·Î ¿­±î
+    //½º·¹µå·Î ÇÏ°ÔµÇ¸é °¢ Ã¤ÆÃ¹æº° ¼Û½Å ¼ö½Å ½º·¹µå¸¦ µÎ¸éµÊ
+    //¼­¹ö·Î ÇÏ°ÔµÇ¸é Å¬·¡½º ÇÏ³ª ¸¸µé¾î¼­ Ã¤ÆÃ ¼­¹ö Å¬·¡½º·Î Æ²À» Â¥°í Æ÷Æ®¹øÈ£ ³Ñ±â¸éµÊ...À½...
+    //Ã¤ÆÃ¹æÀÌ °è¼Ó »ý¼ºµÈ´Ù°í ÇÏ¸é 2¾È °íÁ¤ÀÌ¶ó¸é 1¾ÈÀÎµ¥
+    //ÈÄ¸¦ À§ÇØ¼­ 2¾È ÇØº¸ÀÚ
+    //¿ì¼± ¼±ÅÃµÈ Ã¤ÆÃ¹æ ÄÚµå µé°í ¿À±â
+    memset(buf,0,BUF_SIZE);
+    recv(clntSock,buf,3,0); //Ã¤ÆÃ¹æ ÄÚµå ¹Þ±â
+    std::cout<<buf;
+
+
+    ChatServer serv;
 }
