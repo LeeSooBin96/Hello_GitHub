@@ -36,7 +36,7 @@ void ServerBase::openServer(int waitnum)
     }
     else
     {
-        std::cout<<"서버 오픈 \n";
+        std::cout<<"서버 오픈 (포트:"<<servAdr.sin_port<<") \n";
     }
 }
 //에러 메시지 출력 후 종료
