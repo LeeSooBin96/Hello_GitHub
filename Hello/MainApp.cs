@@ -963,6 +963,839 @@
 //        }
 //    }
 //}
+////3장 연습문제 1.
+//using System;
 
+//namespace RectArea
+//{
+//    class MainApp
+//    {
+//        public static void Main()
+//        {
+//            Console.WriteLine("사각형의 너비를 입력하세요.");
+//            string width = Console.ReadLine(); //문자열로 너비를 입력받음
 
+//            Console.WriteLine("사각형의 높이를 입력하세요.");
+//            string height = Console.ReadLine();
 
+//            //사각형의 넓이를 계산
+//            int widthNum = int.Parse(width); int heightNum = int.Parse(height);
+//            int result = widthNum * heightNum;
+//            //출력
+//            Console.WriteLine("사각형의 넓이는 : {0}", result);
+//        }
+//    }
+//}
+////산술 연산자
+//using System;
+
+//namespace ArithmaticOperators
+//{
+//    class MainApp
+//    {
+//        static void Main(string[] args)
+//        {
+//            int a = 111 + 222; //덧셈
+//            Console.WriteLine($"a: {a}"); //문자열 보간 방식!
+
+//            int b = a - 100; //뺄셈
+//            Console.WriteLine($"b: {b}");
+
+//            int c = b * 10; //곱셈
+//            Console.WriteLine($"c: {c}");
+
+//            double d = c / 6.3; //나눗셈
+//            Console.WriteLine($"d: {d}"); //소수점까지 보려면 피연산자중 하나가 소수점표시가 있어야함
+
+//            Console.WriteLine($"22 / 7 = {22 / 7}({22 % 7})"); //몫과 나머지
+//        }
+//    }
+//}
+////증감 연산자
+//using System;
+
+//namespace IncDecOperator
+//{
+//    class MainApp
+//    {
+//        static void Main(string[] args)
+//        {
+//            int a = 10;
+//            Console.WriteLine(a++); //WriteLine에 값을 전달하고 증가시킴(전위 증가 연산자)
+//            Console.WriteLine(++a); //값을 증가시키고 WriteLien에 전달(후위 증가 연산자)
+//            //앞에 붙을때와 뒤에 붙을때 동작 방식에 유의하자
+//            Console.WriteLine(a--);
+//            Console.WriteLine(--a);
+//        }
+//    }
+//}
+////문자열 결합 연산자
+//using System;
+
+//namespace StringConcatenate
+//{
+//    class MainApp
+//    {
+//        static void Main(string[] args)
+//        {
+//            string result = "123" + "456"; //산술 연산자  + 가 아닌 결합 연산자 + !!
+//            Console.WriteLine(result); //123456
+
+//            result = "Hello" + " " + "World!"; //즉 이렇게 문자열을 계속 이어붙일 수 있다!
+//            Console.WriteLine(result);
+//        }
+//    }
+//}
+////관계 연산자
+//using System;
+
+//namespace RelationalOperateor
+//{
+//    class MainApp
+//    {
+//        static void Main(string[] args)
+//        {
+//            Console.WriteLine($"3 > 4 : {3 > 4}");
+//            Console.WriteLine($"3 >= 4 : {3 >= 4}");
+//            Console.WriteLine($"3 < 4 : {3 < 4}");
+//            Console.WriteLine($"3 <= 4 : {3 <= 4}");
+//            Console.WriteLine($"3 == 4 : {3 == 4}");
+//            Console.WriteLine($"3 != 4 : {3 != 4}");
+//        }
+//    }
+//}
+////논리 연산자
+//using System;
+
+//namespace LogicalOperator
+//{
+//    class MainApp
+//    {
+//        static void Main(string[] args)
+//        {
+//            Console.WriteLine("Testing && ...");
+//            Console.WriteLine($"1 > 0 && 4 < 5 : {1 > 0 && 4 < 5}");
+//            Console.WriteLine($"1 > 0 && 4 > 5 : {1 > 0 && 4 > 5}");
+//            Console.WriteLine($"1 == 0 && 4 > 5 : {1 == 0 && 4 > 5}");
+//            Console.WriteLine($"1 == 0 && 4 < 5 : {1 == 0 && 4 < 5}");
+
+//            Console.WriteLine("\nTesting || ...");
+//            Console.WriteLine($"1 > 0 || 4 < 5 : {1 > 0 || 4 < 5}");
+//            Console.WriteLine($"1 > 0 || 4 > 5 : {1 > 0 || 4 > 5}");
+//            Console.WriteLine($"1 == 0 || 4 > 5 : {1 == 0 || 4 > 5}");
+//            Console.WriteLine($"1 == 0 || 4 < 5 : {1 == 0 || 4 < 5}");
+
+//            Console.WriteLine("\nTesting ! ...");
+//            Console.WriteLine($"!True : {!true}");
+//            Console.WriteLine($"!False : {!false}");
+
+//        }
+//    }
+//}
+////조건 연산자
+//using System;
+
+//namespace ConditionalOperator
+//{
+//    class MainApp
+//    {
+//        static void Main(string[] args)
+//        {
+//            string result = (10 % 2) == 0 ? "짝수" : "홀수"; //10을 2로 나눈 나머지가 0이면
+
+//            Console.WriteLine(result); //짝수가 출력되고 아니면 홀수가 출력된다!
+//        }
+//    }
+//}
+////null 조건부 연산자
+//using System.Collections;
+//using static System.Console;
+
+//namespace NullContitionalOperator
+//{
+//    class MainApp
+//    {
+//        static void Main(string[] args)
+//        {
+//            ArrayList a = null; //객체 선언 null로 초기화
+//            a?.Add("야구"); //a?. 가 null을 반환하므로 Add() 메소드는 호출되지 않음
+//            //멤버(메소드)에 접근하기 전 객체가 null이기 때문에 null반환 즉, 멤버(메소드)를 호출하지 않는다
+//            a?.Add("축구"); //마찬가지!
+//            WriteLine($"Count : {a?.Count}");//마찬가지로 출력되지 않음!
+//            WriteLine($"{a?[0]}"); //객체가 null이 아니면 0번 인덱스에 해당하는 값을 출력했겠지
+//            WriteLine($"{a?[1]}"); //마찬가지
+
+//            a = new ArrayList(); //이제 널이 아니게된 객체!
+//            a?.Add("야구");
+//            a?.Add("축구");
+//            WriteLine($"Count : {a?.Count}");
+//            WriteLine($"{a?[0]}");
+//            WriteLine($"{a?[1]}");
+//            //모두 정상 출력됨!
+//        }
+//    }
+//}
+////시프트 연산자
+//using System;
+
+//namespace ShiftOperator
+//{
+//    class MainApp
+//    {
+//        static void Main(string[] args)
+//        {
+//            Console.WriteLine("Testing << ...");
+
+//            int a = 1; //0000 0000 0000 0000 0000 0000 0000 0001 (4바이트 기준!)
+//            Console.WriteLine("a      : {0:D5} (0x{0:X8})", a); //8자리 16진수(=4바이트)로 표현 가능!
+//            Console.WriteLine("a << 1 : {0:D5} (0x{0:X8})", a << 1); //왼쪽으로 1만큼 이동 (x2)
+//            Console.WriteLine("a << 2 : {0:D5} (0x{0:X8})", a << 2); //왼쪽으로 2만큼 이동 (x2^2)
+//            Console.WriteLine("a << 5 : {0:D5} (0x{0:X8})", a << 5); //왼쪽으로 5만큼 이동 (x2^5)
+
+//            Console.WriteLine("\nTesting >> ...");
+
+//            int b = 255; //0000 0000 0000 0000 0000 0000 1111 1111
+//            Console.WriteLine("b      : {0:D5} (0x{0:X8})", b);
+//            Console.WriteLine("b << 1 : {0:D5} (0x{0:X8})", b >> 1); //오른쪽으로 1만큼 이동 (/2)
+//            Console.WriteLine("b << 2 : {0:D5} (0x{0:X8})", b >> 2); //오른쪽으로 2만큼 이동 (/2^2)
+//            Console.WriteLine("b << 5 : {0:D5} (0x{0:X8})", b >> 5); //오른쪽으로 5만큼 이동 (/2^5)
+
+//            Console.WriteLine("\nTesting >> 2 ..."); //2의 보수법에서의 시프트 연산
+
+//            int c = -255; //1111 1111 1111 1111 1111 1111 0000 0001
+//            Console.WriteLine("c      : {0:D5} (0x{0:X8})", c);
+//            Console.WriteLine("c << 1 : {0:D5} (0x{0:X8})", c >> 1); //1111 1111 1111 1111 1111 1111 1000 0000 
+//            Console.WriteLine("c << 2 : {0:D5} (0x{0:X8})", c >> 2); //1111 1111 1111 1111 1111 1111 1100 0000
+//            Console.WriteLine("c << 5 : {0:D5} (0x{0:X8})", c >> 5); //1111 1111 1111 1111 1111 1111 1111 1000
+//        }
+//    }
+//}
+////비트 논리 연산자
+//using System;
+
+//namespace BitwiseOperator
+//{
+//    class MainApp
+//    {
+//        static void Main(string[] args)
+//        {
+//            int a = 9; //1001
+//            int b = 10; //1010
+
+//            Console.WriteLine($"{a} & {b} : {a & b}"); //논리곱 : 1001 & 1010 = 1000
+//            Console.WriteLine($"{a} | {b} : {a | b}"); //논리합 : 1001 | 1010 = 1011
+//            Console.WriteLine($"{a} ^ {b} : {a ^ b}"); //배타적 논리합 : 1001 ^ 1010 = 0011
+
+//            int c = 255;
+//            Console.WriteLine("~{0}(0x{0:X8}) : {1}(0x{1:X8})", c, ~c);
+//        }
+//    }
+//}
+////할당 연산자
+//using System;
+
+//namespace AssignmentOperator
+//{
+//    class MainApp
+//    {
+//        static void Main(string[] args)
+//        {
+//            int a;
+//            a = 100;
+//            Console.WriteLine($"a = 100 : {a}");
+//            a += 90;
+//            Console.WriteLine($"a += 90 : {a}");
+//            a -= 80;
+//            Console.WriteLine($"a -= 80 : {a}");
+//            a *= 70;
+//            Console.WriteLine($"a *= 70 : {a}");
+//            a /= 60;
+//            Console.WriteLine($"a /= 60 : {a}");
+//            a %= 50;
+//            Console.WriteLine($"a %= 50 : {a}");
+//            a &= 40;
+//            Console.WriteLine($"a &= 40 : {a}");
+//            a |= 30;
+//            Console.WriteLine($"a |= 30 : {a}");
+//            a ^= 20;
+//            Console.WriteLine($"a ^= 20 : {a}");
+//            a <<= 10;
+//            Console.WriteLine($"a <<= 10 : {a}");
+//            a >>= 1;
+//            Console.WriteLine($"a >>= 1 : {a}");
+//        }
+//    }
+//}
+////null 병합 연산자
+//using System;
+
+//namespace NullCoalescing
+//{
+//    class MainApp
+//    {
+//        static void Main(string[] args)
+//        {
+//            int? num = null;
+//            Console.WriteLine($"{num ?? 0}"); //0
+
+//            num = 99;
+//            Console.WriteLine($"{num ?? 0}"); //99
+
+//            string str = null;
+//            Console.WriteLine($"{str ?? "Default"}"); //Default
+
+//            str = "Specific";
+//            Console.WriteLine($"{str ?? "Default"}"); //Specific
+//        }
+//    }
+//}
+////if, else, else if
+//using System;
+
+//namespace IfElse
+//{
+//    class MainApp
+//    {
+//        static void Main(string[] args)
+//        {
+//            Console.Write("숫자를 입력하세요. :");
+
+//            string input = Console.ReadLine();//문자열로 입력받아서
+//            int number = Int32.Parse(input);//정수형으로 변환
+
+//            if (number < 0) //0보다 작으면
+//                Console.WriteLine("음수");
+//            else if (number > 0) //0보다 크면
+//                Console.WriteLine("양수");
+//            else //0이면(둘다 아니니까)
+//                Console.WriteLine("0");
+
+//            if (number % 2 == 0) //2로 나눈게 0이면
+//                Console.WriteLine("짝수");
+//            else //0이 아니니까
+//                Console.WriteLine("홀수");
+//        }
+//    }
+//}
+////if문 중첩
+//using System;
+
+//namespace IfIf
+//{
+//    class MainApp
+//    {
+//        static void Main(string[] args)
+//        {
+//            Console.Write("숫자를 입력하세요. : ");
+
+//            string input = Console.ReadLine();
+//            int number = Convert.ToInt32(input);
+
+//            if(number>0)
+//            {
+//                if (number % 2 == 0) //이렇게 중첩해서 사용할 수 있다.
+//                    Console.WriteLine("0보다 큰 짝수.");
+//                else
+//                    Console.WriteLine("0보다 큰 홀수.");
+//            }
+//            else
+//            {
+//                Console.WriteLine("0보다 작거나 같은 수.");
+//            }
+//        }
+//    }
+//}
+////switch문
+//using System;
+
+//namespace Switch
+//{
+//    class MainApp
+//    {
+//        static void Main(string[] args)
+//        {
+//            Console.Write("요일을 입력하세요.(일,월,화,수,목,금,토) : ");
+//            string day = Console.ReadLine();
+
+//            switch(day)
+//            {
+//                case "일":
+//                    Console.WriteLine("Sunday");
+//                    break;
+//                case "월":
+//                    Console.WriteLine("Monday");
+//                    break;
+//                case "화":
+//                    Console.WriteLine("Tuesday");
+//                    break;
+//                case "수":
+//                    Console.WriteLine("Wednesday");
+//                    break;
+//                case "목":
+//                    Console.WriteLine("Thursday");
+//                    break;
+//                case "금":
+//                    Console.WriteLine("Friday");
+//                    break;
+//                case "토":
+//                    Console.WriteLine("Saturday");
+//                    break;
+//                default:
+//                    Console.WriteLine($"{day}는(은) 요일이 아닙니다.");
+//                    break;
+//            }
+//        }
+//    }
+//}
+////switch문과 패턴 매칭
+//using System;
+
+//namespace Switch2
+//{
+//    class MainApp
+//    {
+//        static void Main(string[] args)
+//        {
+//            object obj = null; //변수(객체) 선언
+
+//            string s = Console.ReadLine(); //문자열로 입력을 받음
+//            if (int.TryParse(s, out int out_i)) //그냥 Parse()메소드는 변환 실패시 예외 발생, 코드 실행을 멈춤
+//                obj = out_i; //반면 TryParse는 변환 성공 여부를 반환하고 성공하면 두번째 매개변수에 그 값을 저장
+//            else if (float.TryParse(s, out float out_f)) //out 키워드는 출력 전용 매개변수임을 나타내는 것
+//                obj = out_f;
+//            else
+//                obj = s;
+
+//            switch(obj)
+//            {
+//                case int i when i>0 : //양수인건 여기서
+//                    Console.WriteLine($"{(int)obj}는 int 형식이며 0보다 큽니다.");
+//                    break;
+//                case int: //아닌 정수는 여기서
+//                    Console.WriteLine($"{(int)obj}는 int 형식입니다.");
+//                    break;
+//                case float:
+//                    Console.WriteLine($"{(float)obj}는 float 형식입니다.");
+//                    break;
+//                default:
+//                    Console.WriteLine($"{obj}(은)는 모르는 형식입니다.");
+//                    break;
+//            }
+//        }
+//    }
+//}
+//using System;
+
+//namespace SwitchExp
+//{
+//    class MainApp
+//    {
+//        static void Main(string[] args)
+//        {
+//            Console.WriteLine("점수를 입력하세요.");
+//            int score = Convert.ToInt32(Console.ReadLine());
+
+//            Console.WriteLine("재수강인가요? (y/n)");
+//            string line = Console.ReadLine();
+//            bool repeated = line == "y" ? true : false;
+
+//            string grade = (int)(Math.Truncate(score / 10.0) * 10) switch
+//            {                   //Trucate() 1의자리 버림!
+//                90 when repeated == true => "B+", //케이스 가드 적용한 것
+//                90 => "A", //스위치 식 변환
+//                /*원래는 case 90: grade="A"; break;*/
+//                80 => "B", //다음 케이스로 넘어갈때는 ,
+//                70 => "c", 
+//                60 => "D",
+//                _ => "F" //default는 _
+//            };
+
+//            Console.WriteLine($"학점 : {grade}");
+//        }
+//    }
+//}
+////while
+//using System;
+
+//namespace While
+//{
+//    class MainApp
+//    {
+//        static void Main(string[] args)
+//        {
+//            int i = 10;
+
+//            while(i>0) //이 조건을 만족(true)하는 동안 반복
+//            {
+//                Console.WriteLine($"i : {i--}");
+//            }
+//        }
+//    }
+//}
+////do while
+//using System;
+
+//namespace While
+//{
+//    class MainApp
+//    {
+//        static void Main(string[] args)
+//        {
+//            int i = 10;
+//            do //일단 실행시키고
+//            {
+//                Console.WriteLine("a) i : {0}", i--);
+//            }
+//            while (i > 0); //조건 검사 --만족하지 못하면 루프 탈출
+
+//            do //이미 0이지만 한번 실행하고
+//            {
+//                Console.WriteLine("b) i : {0}", i--);
+//            }
+//            while (i > 0); //여기에 걸려서 바로 나옴
+//        }
+//    }
+//}
+////for
+//using System;
+
+//namespace For
+//{
+//    class MainApp
+//    {
+//        static void Main(string[] args)
+//        {
+//            for(int i=0;i<5;i++) //5번 반복
+//            {
+//                Console.WriteLine(i); //0~4까지 출력될것
+//            }
+//        }
+//    }
+//}
+////중첩 for
+//using System;
+
+//namespace ForFor
+//{
+//    class MainApp
+//    {
+//        static void Main(string[] args)
+//        {
+//            for(int i=0;i<5;i++) //크게 5번
+//            {//즉 i=0일때 , i=1일때, ...
+//                for(int j=0;j<=i;j++) //작게 i번
+//                {//j=0만 수행, j=0,1수행 ...
+//                    Console.Write("*");
+//                }
+//                Console.WriteLine(); //크게 한번 돌때마다 개행
+//            }
+//        }
+//    }
+//}
+////foreach
+//using System;
+
+//namespace ForEach
+//{
+//    class MainApp
+//    {
+//        static void Main(string[] args)
+//        {
+//            int[] arr = new int[] { 0, 1, 2, 3, 4 }; //C# 배열의 선언법
+
+//            foreach (int a in arr) //각 배열 요소에 접근. 이름을 a로 임시 사용
+//            {
+//                Console.WriteLine(a); //각 a들을 출력시킴
+//            }
+//        }
+//    }
+//}
+////무한 반복 코드 --for
+//using System;
+
+//namespace InfiniteFor
+//{
+//    class MainApp
+//    {
+//        static void Main(string[] args)
+//        {
+//            int i = 0;
+//            for (; ; ) //아무런 조건식이 없기 때문에 무한 반복됨
+//                Console.WriteLine(i++);
+//        }
+//    }
+//}
+////무한 반복 코드 --while
+//using System;
+
+//namespace InfiniteWhile
+//{
+//    class MainApp
+//    {
+//        static void Main(string[] args)
+//        {
+//            int i = 0;
+//            while (true) //조건식 자리에 true가 옴으로써 무한 반복(탈출 조건이 없음)
+//                Console.WriteLine(i++);
+//        }
+//    }
+//}
+////break
+//using System;
+
+//namespace Break
+//{
+//    class MainApp
+//    {
+//        static void Main(string[] args)
+//        {
+//            while(true) //무한 반복 코드
+//            {
+//                Console.Write("계속할까요?(예/아니오) : ");
+//                string answer = Console.ReadLine();
+
+//                if (answer == "아니오") //탈출 조건
+//                    break; //탈출
+//            }
+//        }
+//    }
+//}
+////continue
+//using System;
+
+//namespace Continue
+//{
+//    class MainApp
+//    {
+//        static void Main(string[] args)
+//        {
+//            for(int i=0;i<10;i++)
+//            {
+//                if (i % 2 == 0) //2로 나눈 나머지가 0이면
+//                    continue; //아래 코드 다 무시하고 다음 회차로 넘어감
+
+//                Console.WriteLine($"{i} : 홀수"); //여기는 0으로 나눈 나머지가 0이 아닌애들만 수행됨
+//            }
+//        }
+//    }
+//}
+////goto
+//using System;
+
+//namespace Goto
+//{
+//    class MainApp
+//    {
+//        static void Main(string[] args)
+//        {
+//            Console.Write("종료 조건(숫자)을 입력하세요. :");
+
+//            string input = Console.ReadLine();
+
+//            int input_number = Convert.ToInt32(input);
+
+//            int exit_number = 0;
+
+//            for(int i=0;i<2;i++) //3번을 각 2번하는것을 2번더 ==>12번 반복하는 반복문
+//            {
+//                for(int j=0;j<2;j++) //3번을 각 2번
+//                {
+//                    for(int k=0;k<3;k++) //각 3번
+//                    {
+//                        if (exit_number++ == input_number) //종료숫자가 되면
+//                            goto EXIT_FOR; //EXIT_FOR로 이동
+
+//                        Console.WriteLine(exit_number);
+//                    }
+//                }
+//            }
+//            goto EXIT_PROGRAM; //반복문에 정해진 횟수(12)를 넘어가 종료되면 이게 먼저 수행됨
+
+//        EXIT_FOR:
+//            Console.WriteLine("\nExit nested for..."); //반복문 도는 도중 탈출
+//        EXIT_PROGRAM:
+//            Console.WriteLine("Exit program..."); //프로그램의 종료를 알리는 메시지
+//        }
+//    }
+//}
+////형식 패턴을 활용한 예제
+//using System;
+//class Preschooler { } //사용자 정의 자료형 -클래스!
+//class Underage { }
+//class Adult { }
+//class Senior { }
+
+//internal class MainApp
+//{
+//    static int CalculateFee(object visitor)
+//    {
+//        return visitor switch
+//        {
+//            Underage => 100, //각 형식에 매칭되면
+//            Adult => 500, //각 값 리턴
+//            Senior => 200,
+//            _ => throw new ArgumentException( //해당하지 않으면 예외발생
+//                $"Prohibited age: {visitor.GetType()}", nameof(visitor)),
+//        };
+//    }
+
+//    static void Main(string[] args)
+//    {
+//        Console.WriteLine($"Fee for a Senior: {CalculateFee(new Senior())}");
+//        Console.WriteLine($"Fee for a adult: {CalculateFee(new Adult())}");
+//        Console.WriteLine($"Fee for a underage: {CalculateFee(new Underage())}");
+//        Console.WriteLine($"Fee for a preschooler: {CalculateFee(new Preschooler())}");
+
+//    }
+//}
+////상수 패턴 매칭 예제
+//using System;
+
+////반환형 함수명    정의(람다식)   함수인자  반환인자
+//var GetCountryCode = (string nation) => nation switch 
+//{ //함수인자에 따라 값 바로 할당
+//    "KR" => 82,
+//    "US" => 1,
+//    "UK" => 44,
+//    _ => throw new ArgumentException("Not supported Code") //해당하는것 없으면 예외발생
+//};
+
+//Console.WriteLine(GetCountryCode("KR"));
+//Console.WriteLine(GetCountryCode("US"));
+//Console.WriteLine(GetCountryCode("UK"));
+////프로퍼티 패턴 예제
+//using System;
+//class MainApp
+//{
+//    class Car
+//    {
+//        public string Model { get; set; } //C++ 에서 멤버 값 일일히 설정함수나 값을 가져오는 함수를 만들어야 했다면
+//        public DateTime ProduceAt { get; set; } //C#에서는 이렇게 프러퍼티를 이용해 간단히 만들 수 있다
+//    }
+//    static string GetNickname(Car car)
+//    {
+//        var GenerateMessage = (Car car, string nickname) => //람다식 정의
+//        $"{car.Model} produced in {car.ProduceAt.Year} is {nickname}";
+//        //if (car is Car { Model: "Mustang", ProduceAt.Year: 1967 }) //1967년산 무스탕이면
+//        //    return GenerateMessage(car, "Fastback"); 
+//        //else if (car is Car { Model: "Mustang", ProduceAt.Year: 1976 }) //1976년산 무스탕이면
+//        //    return GenerateMessage(car, "cobra II");
+//        //else
+//        //    return GenerateMessage(car, "Unknown"); //그외
+//        //추가 문제  -- is 연산자가 아닌 switch 이용
+//        return car switch
+//        {
+//            Car { Model: "Mustang", ProduceAt.Year: 1967 } => GenerateMessage(car, "Fastback"),
+//            Car { Model: "Mustang", ProduceAt.Year: 1976 } => GenerateMessage(car, "cobra II"),
+//            _ => GenerateMessage(car, "Unknown")
+//        };
+//    }
+//    static void Main(string[] args)
+//    {
+//        Console.WriteLine(
+//            GetNickname(
+//                new Car() { Model = "Mustang", ProduceAt = new DateTime(1967, 11, 23) }));
+//        Console.WriteLine(
+//            GetNickname(
+//                new Car() { Model = "Mustang", ProduceAt = new DateTime(1976, 6, 7) }));
+//        Console.WriteLine(
+//            GetNickname(
+//                new Car() { Model = "Mustang", ProduceAt = new DateTime(2099, 12, 25) }));
+//    }
+//}
+////논리 패턴
+//using System;
+//class MainApp
+//{
+//    class OrderItem
+//    {
+//        public int Amount { get; set; } //프러퍼티
+//        public int Price { get; set; }
+//    }
+//    //GetPrice 함수 정의
+//    static double GetPrice(OrderItem orderItem) => orderItem switch
+//    { //각 조건에 맞음을 검사!
+//        OrderItem { Amount: 0 } or OrderItem { Price: 0 }               //or
+//            => 0.0,
+//        OrderItem { Amount: >= 100 } and OrderItem { Price: >= 10_000 } //and
+//        => orderItem.Amount * orderItem.Price * 0.8,
+//        not OrderItem { Amount: < 0 }                                   //not
+//        => orderItem.Amount * orderItem.Price * 0.9,
+//        _ => orderItem.Amount * orderItem.Price,
+//    };
+//    static void Main(string[] args)
+//    {
+//        Console.WriteLine(GetPrice(new OrderItem() { Amount = 0, Price = 10_000 }));
+//        Console.WriteLine(GetPrice(new OrderItem() { Amount = 100, Price = 10_000 }));
+//        Console.WriteLine(GetPrice(new OrderItem() { Amount = 100, Price = 9_000 }));
+//        Console.WriteLine(GetPrice(new OrderItem() { Amount = 1, Price = 1_000 }));
+//    }
+//}
+////위치 패턴 switch 식
+//using System;
+
+//class MainApp
+//{
+//    struct Audience
+//    {
+//        public bool IsCitizen { get; init; }
+//        public int Age { get; init; }
+
+//        public Audience(bool isCitizen,int age) //구조체 멤버 초기화
+//        {
+//            IsCitizen = isCitizen;
+//            Age = age;
+//        }
+
+//        public void Deconstruct(out bool isCitizen, out int age) //구조체 분해
+//        {
+//            isCitizen = IsCitizen;
+//            age = Age;
+//        }
+//    }
+
+//    static void Main(string[] args)
+//    {
+//        var CalculateFee = (Audience audience) => audience switch
+//        {
+//            (true, < 19) => 100, //분해된 값과 매칭하여 해당하는 값을 반환함
+//            (true, _) => 200,
+//            (false, < 19) => 200,
+//            (false, _) => 400,
+//        };
+//        var a1 = new Audience(true, 10);
+//        Console.WriteLine($"내국인: {a1.IsCitizen} 나이: {a1.Age} 요금: {CalculateFee(a1)}");
+
+//        var a2 = new Audience(false, 33);
+//        Console.WriteLine($"내국인: {a2.IsCitizen} 나이: {a2.Age} 요금: {CalculateFee(a2)}");
+
+//    }
+//}
+////var 패턴
+////모든 과목이 60점이 넘고, 평균이 60점 이상인 경우에만 Pass
+//using System;
+//using System.Linq;
+
+//var IsPassed = (int[] scores) => scores.Sum() / scores.Length is var average //임시 변수 average에 값 할당
+//                                 && Array.TrueForAll(scores, (score) => score >= 60) //배열의 요소가 모두 조건을 만족하면 true
+//                                 && average >= 60; //임시 변수값에 조건 걸 수 있음
+//int[] scores1 = { 90, 80, 60, 80, 70 };
+//Console.WriteLine($"{string.Join(",", scores1)}: Pass:{IsPassed(scores1)}");
+
+//int[] scores2 = { 90, 80, 59, 80, 70 };
+//Console.WriteLine($"{string.Join(",", scores2)}: Pass:{IsPassed(scores2)}");
+//목록 패턴의 사용!
+using System.Collections.Generic;
+
+var GetStatistics = (List<object[]>records)=>
+{
+    var statistics = new Dictionary<string, int>();
+
+    foreach(var record in records)
+    {
+        var (contentType, contentViews) = record switch
+        {
+
+        }
+    }
+}
